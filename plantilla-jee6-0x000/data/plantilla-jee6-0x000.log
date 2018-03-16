@@ -1,0 +1,3 @@
+/*C4*/SET SCHEMA PUBLIC
+CREATE TABLE usuario\u000a(\u000a   id INTEGER PRIMARY KEY,\u000a   nombre VARCHAR(15),\u000a   contrasenia VARCHAR(15),\u000a   rol INTEGER\u000a)
+drop table usuario
