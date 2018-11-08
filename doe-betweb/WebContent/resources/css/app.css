@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url('/doe-betweb/resources/font/OpenSans-Regular.ttf');
+}
+
+.ui-widget {
+	 font-family: 'OpenSans';
+	 font-size: 12px;
+}

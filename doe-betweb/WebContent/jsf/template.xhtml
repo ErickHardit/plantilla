@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{msg['app.name']} #{msg['app.version']}</title>
+	<h:outputStylesheet library="css" name="app.css"  />
+</h:head>
+<h:body>
+	<h:form id="formMenu">
+	<p:growl id="growl" showDetail="true" globalOnly="true" life="890"/>  
+	<p:megaMenu style="margin-top:10px" >
+		<p:submenu label="Futbol" icon="fa fa-fire">
+			<p:column>
+				<p:submenu label="Liga Nacional">
+					<p:menuitem value="Liga MX" url="/jsf/search.xhtml?cmpt=LMX" />
+					<p:menuitem value="Liga MX Femenil" url="/jsf/search.xhtml?cmpt=MXF" />
+					<p:menuitem value="Ascenso MX" url="/jsf/search.xhtml?cmpt=AMX" />
+					<p:menuitem value="Copa MX" url="/jsf/search.xhtml?cmpt=CMX" />
+					<p:menuitem value="Seleccion Mexicana" url="/jsf/search.xhtml?cmpt=SMX" />
+				</p:submenu>
+			</p:column>
+			<p:column>
+				<p:submenu label="Liga Extranjera">
+					<p:menuitem value="La Liga" url="/jsf/search.xhtml?cmpt=LLG" />
+					<p:menuitem value="La Copa del Rey" url="#" />
+				</p:submenu>
+			</p:column>
+			<p:column>
+				<p:submenu label="Internacional">
+					<p:menuitem value="Champions League" url="#" />
+					<p:menuitem value="Europa League" url="#" />
+					<p:menuitem value="Liga de Naciones UEFA" url="#" />
+					<p:menuitem value="Confederaciones" url="#" />
+					<p:menuitem value="Concachampios" url="#" />
+					<p:menuitem value="Copa Libertadores" url="#" />
+				</p:submenu>
+			</p:column>	
+		</p:submenu>
+		<p:submenu label="Baloncesto" icon="fa fa-fire">
+			<p:column>
+				<p:submenu label="Liga Extranjera">
+					<p:menuitem value="NBA" url="#" />
+				</p:submenu>
+			</p:column>
+			<p:column>
+				<p:submenu label="Internacional">
+					<p:menuitem value="Copa Mundial FIBA" url="#" />
+				</p:submenu>
+			</p:column>
+		</p:submenu>
+		<p:submenu label="Beisbol" icon="fa fa-fire">
+			<p:column>
+				<p:submenu label="Liga Nacional">
+					<p:menuitem value="Liga Mexicana Beisbol" url="#"/>
+				</p:submenu>
+			</p:column>
+			<p:column>
+				<p:submenu label="Liga Extranjera">
+					<p:menuitem value="MLB" url="#" />
+				</p:submenu>
+			</p:column>
+		</p:submenu>
+		<p:submenu label="Futbol Americano" icon="fa fa-fire">
+			<p:column>
+				<p:submenu label="Liga Extranjera">
+					<p:menuitem value="NFL" url="#" />
+				</p:submenu>
+			</p:column>
+		</p:submenu>
+		<f:facet name="options">
+			
+            <p:commandButton type="button" icon="fa fa-search" style="margin-right:10px"/>
+            <p:commandButton type="button" value="${sessionScope.appu}" icon="fa fa-trophy" style="margin-right:10px" rendered="#{!empty sessionScope.appu}"/>
+            <p:commandButton value="Salir" icon="fa fa-sign-out"  actionListener="#{mbLogin.doLogout}" rendered="#{!empty sessionScope.appu}" ajax="false" />
+            <p:commandButton type="button" value="Ingresar" icon="fa fa-sign-in" onclick="PF('modalIngresar').show();" rendered="#{empty sessionScope.appu}"/>
+        </f:facet>
+	</p:megaMenu>
+	</h:form>
+	
+	<p:dialog header="Acceso" widgetVar="modalIngresar" modal="true" width="420" resizable="false">
+			<p:tabView>
+    			<p:tab title="Ingresa">
+    				<h:form id="formIngresa">
+    					
+    					<h:panelGrid columns="2" cellpadding="3">
+        					<h:outputLabel for="fmri_user" 
+        					               value="Usuario:" 
+        					               style="font-weight:normal"/>
+            				<p:inputText id="fmri_user" 
+            				             value="#{mbLogin.user}" 
+            				             placeholder="Nombre de usuario" />            				
+            				<h:outputLabel for="fmri_password" 
+            				               value="Contraseña:" 
+            				               style="font-weight:normal"/>
+            				<p:password id="fmri_password" value="#{mbLogin.password}" placeholder="Contraseña"/>
+            			</h:panelGrid>
+            			<p:commandButton value="Aceptar" icon="fa fa-lock" actionListener="#{mbLogin.doLogin}" update="formMenu:growl"/>
+            		</h:form>
+        		</p:tab>
+        		
+        		<p:tab title="Registrate">
+        			<h:form id="formRegistrate">
+        				
+        				<h:panelGrid columns="2" cellpadding="3">
+        					<h:outputLabel for="fmrr_user" value="Usuario* :" style="font-weight:normal"/>
+            				<p:inputText id="fmrr_user" value="#{mbLogin.user}"  placeholder="Usuario"/>
+            				<h:outputLabel for="password" value="Contraseña* :" style="font-weight:normal"/>
+            				<p:password  value="#{mbLogin.password}" 
+            				             validatorMessage="Valor del campo CONRASEÑA no valido" />
+            			</h:panelGrid>
+            			<p:commandButton value="Aceptar" icon="fa fa-lock"   />
+        			</h:form>
+        		</p:tab>
+        		
+        	</p:tabView>
+	</p:dialog> 
+	
+	<ui:insert name="contenido">
+	</ui:insert>
+
+</h:body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="contenido">
+			#{mbSearch.onload()}
+			<div align="center">
+				<br />
+				<h:form id="gridForm">
+					<p:dataGrid var="e" value="#{mbSearch.events}" columns="3"
+						rows="12" emptyMessage="No hay informacion disponible.">
+						<p:column>
+							<div align="center">
+								<p:panel header="#{e.sportName} . #{e.competitionName} .  #{e.edition} - #{e.stage}">
+									<h:panelGrid columns="3" style="text-align:center">
+										<h:outputText value="#{e.localName}"
+											style="font-weight: bold;" />
+										<h:outputText value="vs" style="width=50; font-weight: bold;" />
+										<h:outputText value="#{e.visitorName}"
+											style="font-weight: bold;" />
+										<p:graphicImage value="../images/java.png" width="110" />
+										<br />
+										<p:graphicImage value="../images/java.png" width="110" />
+									</h:panelGrid>
+									<h:panelGrid column="1" style="text-align:center" width="250">
+										<h:outputText value="#{e.dateTime}" />
+										<h:outputText value="#{e.localStadium}" />
+
+										<p:commandButton icon="fa fa-ticket" value="Apostar" update=":gridForm:display" oncomplete="PF('dlg').show()">
+											<f:setPropertyActionListener value="#{e}" target="#{mbSearch.eventSelected}"/>
+										</p:commandButton> 
+
+									</h:panelGrid>
+								</p:panel>
+							</div>
+						</p:column>
+					</p:dataGrid>
+				
+					<p:dialog modal="true" widgetVar="dlg">
+						<h:panelGrid id="display" columns="2">
+							<f:facet name="header">
+
+							</f:facet>
+							<h:outputText value="Model:" />
+							<h:outputText value="#{mbSearch.eventSelected.eventId}" />
+						</h:panelGrid>
+					</p:dialog>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
