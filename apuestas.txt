@@ -1,0 +1,29 @@
+mysql -h "ip del servidor" -u "nombre de tu database" -p "contraseña de tu database"
+
+IP: 65.99.252.34
+root / dicmaster2018*
+
+Database:	apuestas_doebetweb
+Host:		localhost
+Username:	apuestas_userapp
+Password:	1EQ6pq9b7X12a
+
+
+
+Username:       apuestas
+Password:       HQQJpq9b
+Domain:         apuestassport.com
+
+To log in immediately, follow this link, using your username and password:
+
+http://65.99.252.34:2222
+
+Once your domain resolves, you will be able to follow this link:
+
+http://www.apuestassport.com:2222
+
+
+root / dicmaster2018*
+
+
+mysql -u apuestas_userapp -p
